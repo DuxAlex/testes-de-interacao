@@ -33,7 +33,6 @@ Selecione a cor <input type="color">
 
 }
 
-
 tela.onmousedown = function () {
 
 	desenha = true;
@@ -42,18 +41,6 @@ tela.onmousedown = function () {
 tela.onmouseup = function () {
 
 	desenha = false
-}
-
-
-
-function mudarCor (){
-	indiceCorAtual++;
-	if (indiceCorAtual >= cores.length){
-		indiceCorAtual = 0;
-	}
-	alert ('voce mudou a cor, agora a cor é : ' + cores[indiceCorAtual]);
-	return false;
-
 }
 
 tela.oncontextmenu = mudarCor;
