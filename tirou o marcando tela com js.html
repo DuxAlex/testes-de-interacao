@@ -1,47 +1,60 @@
 <canvas width="600" height="400"></canvas>
-
-<script>
+Selecione a cor <input type="color">
+<script> 
+	var paleta = document.querySelector('input')
 	var tela = document.querySelector ('canvas');
 	var pincel = tela.getContext ('2d');
 
 	pincel.fillStyle = 'grey';
 	pincel.fillRect (0,0, 600,400);
 
-	var cores = ['red' , 'blue', 'green']
-	var indiceCorAtual = 0;
+	var desenha = false;
+
 	var raio = 10;
 
-	function marcaTela (evento) {
+	tela.onmousemove = function marcaTela (evento) {
 
-		var x = evento.pageX - tela.offsetLeft;
-		var y = evento.pageY - tela.offsetTop;
-		console.log (x + ' , ' + y);
-		if (evento.shiftKey){	
+		if(desenha){
+			var x = evento.pageX - tela.offsetLeft;
+			var y = evento.pageY - tela.offsetTop;
+			console.log (x + ' , ' + y);
+			if (evento.shiftKey){	
 			raio = raio + 10; //adiciona 10 ao raio do circulo.
 		}
 		else if (evento.ctrlKey){
 			raio = raio - 10; // diminui 10 no raio do circulo.
 		}
 		
-
-		pincel.fillStyle = cores[indiceCorAtual];
+		pincel.fillStyle = paleta.value;
 		pincel.beginPath ();
 		pincel.arc (x , y , raio, 0, 2 * 3.14);
 		pincel.fill();
-
 	}
 
-	tela.onclick = marcaTela;
+}
 
-	function mudarCor (){
-		indiceCorAtual++;
-		if (indiceCorAtual >= cores.length){
-			indiceCorAtual = 0;
-		}
-		alert ('voce mudou a cor, agora a cor é : ' + cores[indiceCorAtual]);
-		return false;
 
+tela.onmousedown = function () {
+
+	desenha = true;
+}
+
+tela.onmouseup = function () {
+
+	desenha = false
+}
+
+
+
+function mudarCor (){
+	indiceCorAtual++;
+	if (indiceCorAtual >= cores.length){
+		indiceCorAtual = 0;
 	}
+	alert ('voce mudou a cor, agora a cor é : ' + cores[indiceCorAtual]);
+	return false;
 
-	tela.oncontextmenu = mudarCor;
+}
+
+tela.oncontextmenu = mudarCor;
 </script>
