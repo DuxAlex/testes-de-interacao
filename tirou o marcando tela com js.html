@@ -4,15 +4,18 @@
 	var tela = document.querySelector ('canvas');
 	var pincel = tela.getContext ('2d');
 
-	pincel.fillStyle = 'lightgrey';
+	pincel.fillStyle = 'grey';
 	pincel.fillRect (0,0, 600,400);
+
+	var cores = ['red' , 'blue', 'green']
+	var indiceCorAtual = 0;
 
 	function marcaTela (evento) {
 
 		var x = evento.pageX - tela.offsetLeft;
 		var y = evento.pageY - tela.offsetTop;
 		
-		pincel.fillStyle = 'blue';
+		pincel.fillStyle = cores[indiceCorAtual];
 		pincel.beginPath ();
 		pincel.arc (x , y , 10, 0, 2 * 3.14);
 		pincel.fill();
@@ -22,4 +25,16 @@
 	}
 	
 	tela.onclick = marcaTela;
+
+	function mudarCor (){
+		indiceCorAtual++;
+		if (indiceCorAtual >= cores.length){
+			indiceCorAtual = 0;
+		}
+		alert ('voce mudou a cor, agora a cor é : ' + cores[indiceCorAtual]);
+		return false;
+
+	}
+
+	tela.oncontextmenu = mudarCor;
 </script>
