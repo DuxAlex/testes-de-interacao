@@ -9,17 +9,20 @@
 
 	var cores = ['red' , 'blue', 'green']
 	var indiceCorAtual = 0;
+	var raio = 10;
 
 	function marcaTela (evento) {
 
 		var x = evento.pageX - tela.offsetLeft;
 		var y = evento.pageY - tela.offsetTop;
-		var raio = 10;
 		console.log (x + ' , ' + y);
 		if (evento.shiftKey){	
-			raio = raio + 20; //agora o raio vale 30.
+			raio = raio + 10; //adicioan 20 ao raio do circulo.
 		}
-
+		else if (evento.ctrlKey){
+			raio = raio - 10;
+		}
+		
 
 		pincel.fillStyle = cores[indiceCorAtual];
 		pincel.beginPath ();
@@ -27,7 +30,7 @@
 		pincel.fill();
 
 	}
-	
+
 	tela.onclick = marcaTela;
 
 	function mudarCor (){
